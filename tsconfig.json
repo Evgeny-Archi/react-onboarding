@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+         "alwaysStrict": true,
+         "noImplicitAny": true,
+         "strictNullChecks": true,
+         "strictFunctionTypes": true,
+         "strictBindCallApply": true,
+         "outDir": "./build/",
+         "sourceMap": true,
+         "module": "CommonJS",
+         "target": "es6",
+         "jsx": "react",
+         "allowJs": true,
+         "moduleResolution": "node",
+         "esModuleInterop": true,
+         "resolveJsonModule": true,
+         "allowSyntheticDefaultImports": true,
+         "forceConsistentCasingInFileNames": true,
+         "declaration": true,
+         "lib": [
+              "es6",
+              "DOM",
+              "DOM.iterable",
+              "ESNext"
+         ]
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules", "build"]
+}
