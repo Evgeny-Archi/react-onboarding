@@ -21,6 +21,7 @@
     "@types/styled-components": "^5.1.25",
     "@typescript-eslint/eslint-plugin": "^5.27.0",
     "@typescript-eslint/parser": "^5.27.0",
+    "colors": "^1.4.0",
     "esbuild": "^0.14.42",
     "esbuild-plugin-svgr": "^1.0.1",
     "eslint": "^8.17.0",
@@ -48,7 +49,6 @@
   },
   "scripts": {
     "build": "node ./scripts/build.js",
-    "postbuild": "tsc --emitDeclarationOnly --project tsconfig.json",
     "start": "node ./scripts/start.js",
     "type-check": "tsc --noEmit",
     "lint": "eslint --fix",
@@ -58,5 +58,9 @@
   "pre-commit": "pre-commit",
   "engines": {
     "node": ">=16.0.0"
+  },
+  "peerDependencies": {
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0"
   }
 }
