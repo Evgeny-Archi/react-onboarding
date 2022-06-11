@@ -1,25 +1,33 @@
 import { build } from 'esbuild';
 import { exec } from 'child_process';
-import 'colors';
+import chalk from 'chalk';
+import ora from 'ora';
 
-const myPlugin = {
-    name: 'my-plugin',
+const spinner = ora();
+
+const execTypeDeclarations = {
+    name: 'exec-type-declarations',
     setup(build) {
+        build.onStart(() => {
+            spinner.prefixText = 'Building';
+            spinner.start();
+        });
         build.onEnd((result) => {
             if (result.errors.length > 0) {
                 return;
-            } else if (result.warnings.length > 0) {
-                return;
             }
 
-            console.log('Successfully build'.green);
-            console.log('Generating types declaration...');
+            spinner.succeed();
+            spinner.prefixText = 'Generating types';
+            spinner.start();
+
             exec('tsc --emitDeclarationOnly --project tsconfig.json', (error) => {
                 if (error) {
                     console.error(`Generating error: ${error}`);
                     return;
                 }
-                console.log('Successfully generate'.green);
+                spinner.succeed();
+                console.log(chalk.green('Successfully build'));
             });
         });
     },
@@ -35,6 +43,6 @@ build({
     loader: {
         '.svg': 'dataurl',
     },
-    plugins: [myPlugin],
+    plugins: [execTypeDeclarations],
     external: ['react', 'react-dom'],
 }).catch(() => process.exit(1));
