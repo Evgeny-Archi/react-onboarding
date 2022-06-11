@@ -1,9 +1,19 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import App from './App';
+import React, { FC } from 'react';
+import svgUri from './assets/1.svg';
+import { CrushReports } from './assets';
+import { Props } from './types';
 
-const rootContaier = document.getElementById('root');
-console.log(rootContaier);
-// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-const root = createRoot(rootContaier!);
-root.render(<App />);
+export { Props } from './types';
+
+const App: FC<Props> = ({ children }) => {
+    return (
+        <div>
+            <h1>Title</h1>
+            <div>{children}</div>
+            <img src={svgUri} alt="" />
+            <CrushReports />
+        </div>
+    );
+};
+
+export default App;

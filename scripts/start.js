@@ -1,22 +1,13 @@
-import { build } from 'esbuild';
+import { serve } from 'esbuild';
+import chalk from 'chalk';
+import { serveConfig, buildConfig } from './config.js';
 
-build({
-    entryPoints: ['src/index.tsx'],
-    bundle: true,
-    outfile: 'build/app.js',
-    sourcemap: true,
-    loader: {
-        '.svg': 'dataurl',
-    },
-    watch: {
-        onRebuild(err, result) {
-            if (err) {
-                console.error('Watching build failed: ', err);
-            } else {
-                console.log('Watch build success: ', result);
-            }
-        },
-    },
+serve(serveConfig, {
+    ...buildConfig,
+    entryPoints: ['example/index.tsx'],
+    outfile: 'example/app.js',
 })
-    .then(() => console.log('Watching...'))
+    .then(({ host, port }) => {
+        console.log(`Exmaple page started on ${chalk.underline(`${host}:${port}`)}`);
+    })
     .catch(() => process.exit(1));
