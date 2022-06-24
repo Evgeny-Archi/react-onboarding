@@ -8,7 +8,7 @@ const execTypeDeclarations = {
     name: 'exec-type-declarations',
     setup(build) {
         build.onStart(() => {
-            spinner.prefixText = 'Building';
+            spinner.text = 'Building';
             spinner.start();
         });
         build.onEnd((result) => {
@@ -17,10 +17,10 @@ const execTypeDeclarations = {
             }
 
             spinner.succeed();
-            spinner.prefixText = 'Generating types';
+            spinner.text = 'Generating types';
             spinner.start();
 
-            exec('tsc --emitDeclarationOnly --project tsconfig.json', (error) => {
+            exec('tsc --emitDeclarationOnly --project tsconfig.prod.json', (error) => {
                 if (error) {
                     console.error(`Generating error: ${error}`);
                     return;

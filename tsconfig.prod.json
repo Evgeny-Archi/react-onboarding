@@ -5,7 +5,8 @@
          "strictNullChecks": true,
          "strictFunctionTypes": true,
          "strictBindCallApply": true,
-         "sourceMap": true,
+         "outDir": "build",
+         "rootDir": "src",
          "module": "ES2020",
          "target": "es6",
          "jsx": "react",
@@ -18,11 +19,9 @@
          "declaration": true,
          "lib": [
               "es6",
-              "DOM",
-              "DOM.iterable",
               "ESNext"
          ]
     },
-    "include": ["src/**/*", "example/**/*"],
+    "include": ["src/**/*"],
     "exclude": ["node_modules", "build"]
 }
