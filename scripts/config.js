@@ -19,7 +19,10 @@ export const serveConfig = {
     servedir: 'example',
     onRequest({ status, timeInMS }) {
         if (timeInMS > 0 && status === 200) {
-            console.log(chalk.green('Successfully rebuild'));
+            console.log(
+                chalk.green(`Successfully rebuild ${chalk.bold(buildConfig.outfile)} in ${chalk.bold(timeInMS)} ms\n`) +
+                    'Waiting for reload page...'
+            );
         }
     },
 };

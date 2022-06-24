@@ -5,6 +5,7 @@ import { serveConfig, buildConfig } from './config.js';
 serve(serveConfig, {
     ...buildConfig,
     entryPoints: ['example/index.tsx'],
+    tsconfig: 'tsconfig.json',
     outfile: 'example/app.js',
 })
     .then(({ host, port }) => {
