@@ -1,3 +1,5 @@
-import Wrapper from './components/Wrapper';
+import App from './App';
+import { SliderProps } from './types/types';
 
-export { Wrapper };
+export default App;
+export { SliderProps };

@@ -10,6 +10,7 @@ export const buildConfig = {
     sourcemap: true,
     loader: {
         '.svg': 'dataurl',
+        '.png': 'dataurl',
     },
     plugins: [svgrPlugin({ typescript: true })],
 };
