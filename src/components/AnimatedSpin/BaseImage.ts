@@ -1,4 +1,6 @@
-import styled, { keyframes, css } from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+import withSlideTransition from '../../hoc/with-slide-transition';
+import { SLIDEIN_FW, SLIDEOUT_FW, SLIDEIN_BW, SLIDEOUT_BW } from '../../constants/animation-name';
 
 const HIDDEN_IMAGE_OFFSET = '-180px, -50px';
 const ACTIVE_IMAGE_OFFSET = '180px, 50px';
@@ -27,34 +29,39 @@ const fadeoutBackward = keyframes`
     to { transform: rotate(-180deg) translate(${ACTIVE_IMAGE_OFFSET}) rotate(180deg); opacity: 0; }
 `;
 
-const Image = styled.img<{ active: boolean }>`
+const BaseImage = styled.img`
+    width: 200px;
+    height: auto;
+    position: absolute;
+    top: 200px;
+    left: 200px;
+    filter: drop-shadow(0 60px 30px hsla(60, 0%, 53%, 30%)) drop-shadow(0 60px 40px hsla(100, 10%, 10%, 20%));
+    /* filter: drop-shadow(0 70px 30px hsla(243, 15%, 50%, 50%)) drop-shadow(0 70px 40px hsla(100, 10%, 10%, 30%)); */
     will-change: transform, opacity;
 
     opacity: 0;
     transform: translate(${HIDDEN_IMAGE_OFFSET});
 
-    ${({ active }) =>
-        active &&
-        css`
-            opacity: 1;
-            transform: translate(${ACTIVE_IMAGE_OFFSET});
-        `}
+    &[data-active='true'] {
+        opacity: 1;
+        transform: translate(${ACTIVE_IMAGE_OFFSET});
+    }
 
-    &.fadein-forward {
+    &.${SLIDEIN_FW} {
         animation: ${fadeinForward} 1.5s ease-out forwards;
     }
 
-    &.fadein-backward {
+    &.${SLIDEIN_BW} {
         animation: ${fadeinBackward} 1.5s ease-out forwards;
     }
 
-    &.fadeout-forward {
+    &.${SLIDEOUT_FW} {
         animation: ${fadeoutForward} 0.5s ease-in forwards;
     }
 
-    &.fadeout-backward {
+    &.${SLIDEOUT_BW} {
         animation: ${fadeoutBackward} 0.5s ease-in forwards;
     }
 `;
 
-export default Image;
+export default withSlideTransition<HTMLImageElement>(BaseImage);

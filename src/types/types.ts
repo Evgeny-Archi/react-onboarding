@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import Animations from '../enums/animations';
 
 export interface Slide {
     title: string;
@@ -12,4 +13,6 @@ export interface SliderProps {
     autoplay?: boolean;
     slides: Slide[];
     className?: string;
+    animation?: `${Animations}`;
+    disableClouds?: boolean;
 }

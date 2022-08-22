@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import Content from './Content';
 import Pentagon from './Pentagon';
 import Header from './Header';
-import SlideTitle from './Slides/SlideTitle2';
+import SlideTitle from './SlideTitle';
 import Title from './Title';
-import Slides from './Slide';
+import Slides from './Slides';
 import Footer from './Footer/Footer';
 import AnimatedSpin from './AnimatedSpin/AnimatedSpin';
 import { useAppSelector, useAppDispatcher } from '../hooks/redux';
@@ -19,14 +19,13 @@ const Relative = styled.div`
 const Slider: FC<Pick<SliderProps, 'className'>> = ({ className }) => {
     const intervalRef = useRef<number>();
     const dispatch = useAppDispatcher();
-    const { autoplay } = useAppSelector((state) => state.slider);
+    const autoplay = useAppSelector((state) => state.slider.autoplay);
 
     useEffect(() => {
         if (autoplay) {
-            const intervalId = window.setInterval(() => {
+            intervalRef.current = window.setInterval(() => {
                 dispatch(next());
             }, 1500);
-            intervalRef.current = intervalId;
         } else {
             clearInterval(intervalRef.current);
         }

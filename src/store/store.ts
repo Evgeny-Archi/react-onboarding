@@ -3,8 +3,9 @@ import sliderReducer from './slice';
 import { SliderProps } from '../types/types';
 import { SliderState } from '../types/store';
 import logger from './logger';
+import Animations from '../enums/animations';
 
-const createStore = ({ title, autoplay, slides }: SliderProps) => {
+const createStore = ({ title, autoplay, slides, animation, disableClouds }: SliderProps) => {
     const normalizeSlides = slides.map((slide, idx) => {
         return {
             ...slide,
@@ -15,8 +16,9 @@ const createStore = ({ title, autoplay, slides }: SliderProps) => {
     const preloadedState: SliderState = {
         title,
         autoplay: Boolean(autoplay),
-        animation: 'slide',
+        animation: animation || Animations.Default,
         slides: normalizeSlides,
+        disableClouds: Boolean(disableClouds),
         activeSlide: {
             id: normalizeSlides[0].id,
             direction: null,
@@ -30,7 +32,11 @@ const createStore = ({ title, autoplay, slides }: SliderProps) => {
         preloadedState: {
             slider: preloadedState,
         },
-        middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+        middleware: (getDefaultMiddleware) => {
+            const middleware = getDefaultMiddleware();
+            if (__DEV__) middleware.push(logger);
+            return middleware;
+        },
     });
 };
 

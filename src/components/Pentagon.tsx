@@ -2,6 +2,12 @@ import React, { FC, useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { useAppSelector } from '../hooks/redux';
 
+const getRandomNumber = (a: number, b: number): number => {
+    const [min, max] = [Math.ceil(Math.min(a, b)), Math.floor(Math.max(a, b))];
+    const randomNumber = Math.random() * (max - min + 1) + min;
+    return Math.floor(randomNumber);
+};
+
 const colors = [
     { start: '#f6bb63', stop: '#fde56d' },
     { start: '#59f1cb', stop: '#57eee8' },
@@ -27,6 +33,7 @@ const Pentagon: FC = () => {
     const { id, direction } = useAppSelector((state) => state.slider.activeSlide);
     const currentValue = useRef(id);
     const [rotateDeg, setRotateDeg] = useState(20);
+    const color = colors[getRandomNumber(0, colors.length - 1)];
 
     useEffect(() => {
         if (currentValue.current !== id) {
@@ -47,8 +54,8 @@ const Pentagon: FC = () => {
         >
             <defs>
                 <linearGradient id="sw-gradient" x1="0" x2="1" y1="1" y2="0">
-                    <stop id="stop1" stopColor={colors[id].start} offset="0%"></stop>
-                    <stop id="stop2" stopColor={colors[id].stop} offset="100%"></stop>
+                    <stop id="stop1" stopColor={color.start} offset="0%"></stop>
+                    <stop id="stop2" stopColor={color.stop} offset="100%"></stop>
                 </linearGradient>
             </defs>
             <path

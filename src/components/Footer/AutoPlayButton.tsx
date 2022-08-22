@@ -24,7 +24,7 @@ const PlayButton = styled(Button)`
 
 const AutoPlayButton: FC = () => {
     const dispatch = useAppDispatcher();
-    const { autoplay } = useAppSelector((state) => state.slider);
+    const autoplay = useAppSelector((state) => state.slider.autoplay);
 
     return (
         <PlayButton data-active={autoplay} onClick={() => dispatch(toggleAutoplay())}>

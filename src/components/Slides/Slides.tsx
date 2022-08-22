@@ -1,53 +1,29 @@
-import React, { FC, useRef, useEffect } from 'react';
-import styled from 'styled-components';
+import React, { FC, forwardRef, ForwardedRef } from 'react';
 import { useAppSelector } from '../../hooks/redux';
+import SlideSlide from './SlideSlide';
+import FadeSlide from './FadeSlide';
+import Animations from '../../enums/animations';
 
-const Container = styled.div`
-    height: 240px;
-    margin-left: 500px;
-    position: relative;
-    transition: height 0.5s ease;
-`;
+type Props = {
+    ref?: ForwardedRef<HTMLDivElement>;
+};
 
-const Slide = styled.div`
-    padding-right: 40px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-
-    &[data-active='true'] {
-        opacity: 1;
-        z-index: 1;
-    }
-`;
-
-const Slides: FC = () => {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const slideRef = useRef<HTMLDivElement>(null);
-    const slides = useAppSelector((state) => state.slider.slides);
+// eslint-disable-next-line react/display-name
+const Slides: FC<Props> = forwardRef((props, ref) => {
+    const { slides, animation } = useAppSelector((state) => state.slider);
     const { id } = useAppSelector((state) => state.slider.activeSlide);
 
-    useEffect(() => {
-        if (slideRef.current && containerRef.current) {
-            if (slideRef.current.offsetHeight > 240) {
-                containerRef.current.style.height = `${slideRef.current.offsetHeight}px`;
-            } else {
-                containerRef.current.style.height = '240px';
-            }
-        }
-    }, [id]);
+    const Slide = animation === Animations.Default ? SlideSlide : FadeSlide;
 
     return (
-        <Container ref={containerRef}>
+        <>
             {slides.map((slide) => (
-                <Slide key={slide.id} data-active={slide.id === id} ref={slide.id === id ? slideRef : undefined}>
+                <Slide key={slide.id} id={slide.id} forwardedRef={slide.id === id ? ref : null}>
                     {slide.content}
                 </Slide>
             ))}
-        </Container>
+        </>
     );
-};
+});
 
 export default Slides;

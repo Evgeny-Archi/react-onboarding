@@ -7,7 +7,7 @@ import { SliderProps } from './types/types';
 const App: FC<SliderProps> = ({ className, ...sliderProps }) => {
     const store = createStore(sliderProps);
 
-    console.log(store.getState());
+    if (__DEV__) console.log(store.getState());
 
     return (
         <ReduxStoreProvider store={store}>

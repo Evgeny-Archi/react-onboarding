@@ -15,7 +15,8 @@ export type SliderState = {
     title: SliderProps['title'];
     autoplay: SliderProps['autoplay'];
     activeSlide: ActiveSlide;
-    animation: string;
+    animation: SliderProps['animation'];
+    disableClouds: SliderProps['disableClouds'];
     slides: SlideState[];
 };
 

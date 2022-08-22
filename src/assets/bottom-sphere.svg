@@ -1,0 +1,10 @@
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" x="0" y="0" viewBox="0 0 500 500">
+  <defs>
+    <linearGradient id="linearGradient">
+      <stop style="stop-color:#ffffff;stop-opacity:1" offset="0" id="stop6455"/>
+      <stop style="stop-color:#cc4fc7;stop-opacity:1" offset="1" id="stop6457"/>
+    </linearGradient>
+    <radialGradient cx="171.20810" cy="196.85463" r="200" fx="171.20810" fy="196.85463" id="radialGradient" xlink:href="#linearGradient" gradientUnits="userSpaceOnUse" gradientTransform="matrix(1.040418,0.796229,-0.814518,1.064316,153.4218,-150.4353)"/>
+  </defs>
+  <circle cx="250" cy="250" r="200" style="fill:url(#radialGradient)"/>
+</svg>

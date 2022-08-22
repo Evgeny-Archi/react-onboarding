@@ -1,3 +1,5 @@
+declare const __DEV__: boolean;
+
 declare module '*.svg' {
     const urlOrBase64: string;
     export default urlOrBase64;

@@ -7,6 +7,9 @@ serve(serveConfig, {
     entryPoints: ['example/index.tsx'],
     tsconfig: 'tsconfig.json',
     outfile: 'example/app.js',
+    define: {
+        __DEV__: true,
+    },
 })
     .then(({ host, port }) => {
         console.log(`Exmaple page started on ${chalk.underline(`${host}:${port}`)}`);

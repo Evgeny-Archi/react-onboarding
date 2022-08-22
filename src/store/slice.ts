@@ -1,10 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { SliderState } from '../types/store';
+import Directions from '../enums/directions';
+import Animations from '../enums/animations';
 
 const initialState: SliderState = {
     title: '',
     autoplay: false,
-    animation: 'slide',
+    animation: Animations.Default,
+    disableClouds: false,
     activeSlide: {
         id: 0,
         direction: null,
@@ -19,7 +22,7 @@ const sliderSlice = createSlice({
         setActiveSlide(state, action: PayloadAction<number>) {
             state.activeSlide = {
                 id: action.payload,
-                direction: state.activeSlide.id < action.payload ? 'forward' : 'backward',
+                direction: state.activeSlide.id < action.payload ? Directions.Forward : Directions.Backward,
             };
         },
         toggleAutoplay(state) {
@@ -28,10 +31,10 @@ const sliderSlice = createSlice({
         next(state) {
             if (state.slides.length - 1 === state.activeSlide.id) {
                 state.activeSlide.id = 0;
-                state.activeSlide.direction = 'backward';
+                state.activeSlide.direction = Directions.Backward;
             } else {
                 state.activeSlide.id += 1;
-                state.activeSlide.direction = 'forward';
+                state.activeSlide.direction = Directions.Forward;
             }
         },
     },

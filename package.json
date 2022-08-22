@@ -63,8 +63,5 @@
   "pre-commit": "pre-commit",
   "engines": {
     "node": ">=16.0.0"
-  },
-  "peerDependencies": {
-    "react": "^18.1.0"
   }
 }

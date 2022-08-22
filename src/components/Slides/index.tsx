@@ -6,6 +6,7 @@ import { useAppSelector } from '../../hooks/redux';
 const Container = styled.div`
     height: 240px;
     margin-left: 500px;
+    margin-right: 40px;
     position: relative;
     transition: height 0.5s ease;
     overflow: hidden;

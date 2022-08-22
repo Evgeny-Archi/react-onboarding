@@ -8,4 +8,7 @@ build({
     plugins: [...buildConfig.plugins, execTypeDeclarations],
     tsconfig: 'tsconfig.prod.json',
     external: ['react-dom'],
+    define: {
+        __DEV__: false,
+    },
 }).catch(() => process.exit(1));

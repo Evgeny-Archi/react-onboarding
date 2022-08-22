@@ -1,8 +1,9 @@
-import React, { FC, useEffect, useRef, useState } from 'react';
+import React, { FC, useEffect, useRef, useState, memo } from 'react';
 import styled from 'styled-components';
 import Button from './Button';
 import { useAppSelector, useAppDispatcher } from '../../hooks/redux';
 import { setActiveSlide } from '../../store/slice';
+import { Circle } from '../../assets';
 
 const ControlsPanel = styled.div`
     position: relative;
@@ -27,6 +28,14 @@ const Separator = styled.div`
     width: 40px;
     text-align: center;
     color: #c2c2c5;
+`;
+
+const CircleSvg = styled(Circle)`
+    fill: rgb(177, 182, 186);
+
+    &[data-active='true'] {
+        fill: #6f7070;
+    }
 `;
 
 const Controls: FC = () => {
@@ -56,7 +65,7 @@ const Controls: FC = () => {
                             key={slide.id}
                             ref={slide.id === id ? ref : null}
                         >
-                            {slide.navIcon}
+                            {slide.navIcon || <CircleSvg data-active={slide.id === id} />}
                         </Button>
                         {slide.id < slides.length - 1 && <Separator>&#8212;</Separator>}
                     </>
@@ -67,4 +76,4 @@ const Controls: FC = () => {
     );
 };
 
-export default Controls;
+export default memo(Controls);
