@@ -9,7 +9,7 @@ import Slides from './Slides';
 import Footer from './Footer/Footer';
 import AnimatedSpin from './AnimatedSpin/AnimatedSpin';
 import { useAppSelector, useAppDispatcher } from '../hooks/redux';
-import { next } from '../store/slice';
+import { setAutoplayedSlide } from '../store/slice';
 import { SliderProps } from '../types/types';
 
 const Relative = styled.div`
@@ -24,7 +24,7 @@ const Slider: FC<Pick<SliderProps, 'className'>> = ({ className }) => {
     useEffect(() => {
         if (autoplay) {
             intervalRef.current = window.setInterval(() => {
-                dispatch(next());
+                dispatch(setAutoplayedSlide());
             }, 1500);
         } else {
             clearInterval(intervalRef.current);

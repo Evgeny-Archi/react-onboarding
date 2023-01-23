@@ -28,7 +28,7 @@ const sliderSlice = createSlice({
         toggleAutoplay(state) {
             state.autoplay = !state.autoplay;
         },
-        next(state) {
+        setAutoplayedSlide(state) {
             if (state.slides.length - 1 === state.activeSlide.id) {
                 state.activeSlide.id = 0;
                 state.activeSlide.direction = Directions.Backward;
@@ -40,6 +40,6 @@ const sliderSlice = createSlice({
     },
 });
 
-export const { next, setActiveSlide, toggleAutoplay } = sliderSlice.actions;
+export const { setAutoplayedSlide, setActiveSlide, toggleAutoplay } = sliderSlice.actions;
 
 export default sliderSlice.reducer;

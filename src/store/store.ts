@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import sliderReducer from './slice';
-import createNormalizedSlides from './prepare-data';
+import createNormalizedSlides from './create-slides';
 import { SliderProps } from '../types/types';
 import { SliderState } from '../types/store';
 import logger from './logger';
