@@ -1,13 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import sliderReducer from './slice';
-import prepareData from './prepare-data';
+import createNormalizedSlides from './prepare-data';
 import { SliderProps } from '../types/types';
 import { SliderState } from '../types/store';
 import logger from './logger';
 import Animations from '../enums/animations';
 
 const createStore = ({ title, autoplay, slides, animation, disableClouds }: SliderProps) => {
-    const normalizedSlides = prepareData(slides);
+    const normalizedSlides = createNormalizedSlides(slides);
 
     const preloadedState: SliderState = {
         title,

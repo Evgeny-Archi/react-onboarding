@@ -4,13 +4,15 @@ interface ReturnedSlide extends Slide {
     id: number;
 }
 
-const prepareData = (slides: Slide[]): ReturnedSlide[] => {
-    return slides.map((slide, idx) => {
-        return {
-            ...slide,
-            id: idx,
-        };
-    });
+const addSlideIdentifier = (slide: Slide, id: number): ReturnedSlide => {
+    return {
+        ...slide,
+        id,
+    };
 };
 
-export default prepareData;
+const createNormalizedSlides = (slides: Slide[]): ReturnedSlide[] => {
+    return slides.map((slide, idx) => addSlideIdentifier(slide, idx));
+};
+
+export default createNormalizedSlides;
