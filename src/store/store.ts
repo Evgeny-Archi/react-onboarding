@@ -25,7 +25,7 @@ const createStore = ({ title, autoplay, slides, animation, disableClouds }: Slid
         },
     };
 
-    return configureStore({
+    const store = configureStore({
         reducer: {
             slider: sliderReducer,
         },
@@ -38,6 +38,10 @@ const createStore = ({ title, autoplay, slides, animation, disableClouds }: Slid
             return middleware;
         },
     });
+
+    if (__DEV__) console.log(store.getState());
+
+    return store;
 };
 
 export default createStore;
