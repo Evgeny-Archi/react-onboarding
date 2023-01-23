@@ -1,26 +1,22 @@
 import { configureStore } from '@reduxjs/toolkit';
 import sliderReducer from './slice';
+import prepareData from './prepare-data';
 import { SliderProps } from '../types/types';
 import { SliderState } from '../types/store';
 import logger from './logger';
 import Animations from '../enums/animations';
 
 const createStore = ({ title, autoplay, slides, animation, disableClouds }: SliderProps) => {
-    const normalizeSlides = slides.map((slide, idx) => {
-        return {
-            ...slide,
-            id: idx,
-        };
-    });
+    const normalizedSlides = prepareData(slides);
 
     const preloadedState: SliderState = {
         title,
         autoplay: Boolean(autoplay),
         animation: animation || Animations.Default,
-        slides: normalizeSlides,
+        slides: normalizedSlides,
         disableClouds: Boolean(disableClouds),
         activeSlide: {
-            id: normalizeSlides[0].id,
+            id: normalizedSlides[0].id,
             direction: null,
         },
     };
@@ -39,7 +35,7 @@ const createStore = ({ title, autoplay, slides, animation, disableClouds }: Slid
         },
     });
 
-    if (__DEV__) console.log(store.getState());
+    if (__DEV__) console.log('Init store:', store.getState());
 
     return store;
 };
