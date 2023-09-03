@@ -4,6 +4,8 @@ import GlobalStyles from './GlobalStyles';
 import sliderItems from './stub';
 import SListItemder from '../src';
 
+// Test comment
+
 const Header = styled.div`
     height: 60px;
     display: flex;
